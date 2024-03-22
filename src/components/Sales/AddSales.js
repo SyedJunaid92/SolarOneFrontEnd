@@ -10,6 +10,8 @@ import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
 import { useSnackbar } from 'notistack'
 import { saleAdd } from "../../services/sale.service";
+import { getAllInventory } from "../../services/inventory.service";
+import { getAllproductOf } from "../../services/productOf.service";
 
 
 const AddSales = (props) => {
@@ -27,6 +29,8 @@ const AddSales = (props) => {
     const [details,setDetails] = useState("")
     const [paymentMethod,setPaymentMethod] = useState("")
     const [loading,setLoading] = useState(false)
+    const [allProductOf,setAllProductOf] = useState([])
+    const [allInventory,setAllInventory] = useState([])
 
     useEffect(() => {
         const getCustomerData = async () => {
@@ -56,9 +60,38 @@ const AddSales = (props) => {
 
             }
         }
+        const getInventoryData = async () => {
+            try {
+                const response = await getAllInventory(email)
+                if (response.status == 200) {
+                    setAllInventory(response.data.data)
+                } else {
+                    setAllInventory([])
+                }
+
+            } catch (err) {
+                setAllInventory([])
+            }
+        }
+
+        const getProductOfData = async () => {
+            try {
+                const response = await getAllproductOf(email)
+                if (response.status == 200) {
+                    setAllProductOf(response.data.data)
+                } else {
+                    setAllProductOf([])
+                }
+
+            } catch (err) {
+                setAllInventory([])
+            }
+        }
 
         getCustomerData()
         getProductData()
+        getInventoryData()
+        getProductOfData()
 
     }, [])
 
@@ -69,25 +102,26 @@ const AddSales = (props) => {
         price: parseFloat(price || "0"),
         qty: "",
         discount: "",
-        product: "",
+        product_of: "",
         total: "",
         picture,
-        watt
+        watt,
+        product_of_id:""
     });
 
     const updateItem = (id, itemAttributes) => {
         try {
             const index = invoiceDetail.findIndex(x => x.code === id);
-
+            
             if (index === -1) {
                 console.error('Something wen\'t wrong');
             } else {
-
                 const data = [
                     ...invoiceDetail.slice(0, index),
                     { ...invoiceDetail[index], ...itemAttributes },
                     ...invoiceDetail.slice(index + 1)
                 ];
+                console.log("date---", data)
                 setInvoiceDetail([...data])
             }
 
@@ -96,13 +130,22 @@ const AddSales = (props) => {
             console.log("Error====", err)
         }
     };
-    const handleChangeTable = (name, id) => event => {
+    const handleChangeTable = (name, id,event) => {
+        
+        if(name == "product_of")
+        {
+            updateItem(id, { [name]: event.target.value?.split("-")?.[0], product_of_id:event.target.value?.split("-")?.[1] });
 
-        updateItem(id, { [name]: event.target.value });
 
+        }else{
+            updateItem(id, { [name]: event.target.value });
+
+        }
+
+        
     };
 
-    const handleChangePrice = (name, id) => event => {
+    const handleChangePrice = (name, id,event)  => {
 
         updateItem(id, { [name]: event.target.value?.replace(/[^0-9]/gi, "") });
 
@@ -127,13 +170,42 @@ const AddSales = (props) => {
                 <span>{data.price}</span>
             </td>
             <td className="textAlign">
-                <textarea value={numberWithCommas(data.qty)} onChange={handleChangePrice('qty', data?.code)} />
+                <textarea value={numberWithCommas(data.qty)} onChange={(e)=>
+                {
+                    if(data.product_of)
+                    {
+                        handleInventoryItem("qty", data, e)
+                    }else{
+                        handleChangePrice('qty', data?.code,e)
+                    }
+                }} />   
             </td>
             <td className="textAlign">
-                <textarea value={numberWithCommas(data.discount)} onChange={handleChangePrice('discount', data?.code)} />
+                <textarea value={numberWithCommas(data.discount)} onChange={(e)=>handleChangePrice('discount', data?.code,e)} />
             </td>
             <td className="textAlign">
-                <textarea value={numberWithCommas(data.product)} onChange={handleChangePrice('product', data?.code)} />
+                <TextField  
+                size="small"
+                fullWidth
+                sx={{ color: Colors.customer.textFieldColor, borderColor: Colors.customer.borderColor, border:0 }}
+                select
+                value={`${data.product_of}-${data.product_of_id}` || ""}
+                onChange={(e)=>{
+                    // if(+data.qty > 0)
+                    // {
+                        handleInventoryItem("product_of", data, e)
+
+                    // }else{
+                    //     handleChangeTable("product_of", data.code, e)
+                    // }
+
+                }}
+                >
+                {allProductOf.map(item=>{
+                    return <MenuItem key={item._id} value={`${item.name}-${item._id}`}>{item.name}</MenuItem>
+                })}
+
+                </TextField>
             </td>
             <td className="textAlign" >
 
@@ -143,6 +215,40 @@ const AddSales = (props) => {
 
         </tr>
     ));
+
+    const handleInventoryItem =(name,data,event)=>{
+        if(name == "product_of")
+        {
+        let findInventoryItem = allInventory.find(item => item.product_code == data.code && item.product_of_id == event.target.value?.split("-")?.[1])
+        if(findInventoryItem)
+        {
+            if(+findInventoryItem.quantity >= +data.qty)
+            {
+                handleChangeTable(name, data.code, event)
+            }else{
+                showAlert(`Max Quantity Limit is ${findInventoryItem.quantity}`,"error")
+            }
+        }else{
+            showAlert(`This Product is not Available in Inventory`,"error")
+        }
+    }else if(name == "qty")
+    {
+        let findInventoryItem = allInventory.find(item => item.product_code == data.code && item.product_of_id == data.product_of_id)
+        if(findInventoryItem)
+        {
+            if(+findInventoryItem.quantity >= +event.target.value?.replace(/[^0-9]/gi, ""))
+            {
+                handleChangePrice(name, data.code, event)
+            }else{
+                showAlert(`Max Quantity Limit is ${findInventoryItem.quantity}`,"error")
+            }
+        }else{
+            showAlert(`This Product is not Available in Inventory`,"error")
+        }
+
+    }
+
+    }
 
 
     const handleRemoveRow = (e, target) => {

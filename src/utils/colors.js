@@ -20,6 +20,14 @@ customer:{
     dropDownMenuColor:"#DFF2FC",
     buttonColor :"#29B3FD",
     textFieldColor:"#6F6C6C"
+},
+inventory:{
+    headColor:"#000D6B",
+    borderColor:"#29B3FD",
+    placeHolderColor:"#898888",
+    dropDownMenuColor:"#DFF2FC",
+    buttonColor :"#29B3FD",
+    textFieldColor:"#6F6C6C"
 }
 }
 

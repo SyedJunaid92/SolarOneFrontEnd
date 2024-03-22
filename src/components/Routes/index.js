@@ -1,7 +1,7 @@
 import React , {useEffect} from "react";
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
-import { CustomerListing, Login, ProductListing, ProductOfListing, SalesListing } from "./pageListAsync";
+import { CustomerListing, InventoryListing, Login, ProductListing, ProductOfListing, SalesListing } from "./pageListAsync";
 
 
 
@@ -33,6 +33,7 @@ const ApplicationRoutes = () => {
                     <Route path="/app/sale" element={<SalesListing />} />
                     <Route path="/app/customer" element={<CustomerListing />} />
                     <Route path="/app/productof" element={<ProductOfListing />} />
+                    <Route path="/app/inventory" element={<InventoryListing />} />
                     <Route path="*" element={<Navigate to="/app/product" replace />} />
                 </Route>
 

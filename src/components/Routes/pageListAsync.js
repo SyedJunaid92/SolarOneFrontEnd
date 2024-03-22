@@ -45,3 +45,11 @@ export const ProductListing = loadable(
       fallback: <Loading />,
     }
   );
+
+  // InventoryListing
+  export const InventoryListing = loadable(
+    () => import("../Inventory/InventoyListing"),
+    {
+      fallback: <Loading />,
+    }
+  );

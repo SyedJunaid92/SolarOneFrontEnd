@@ -221,7 +221,7 @@ const ProductsListing = () => {
 
 
 
-      <div className="flex justify-end position-relative mt-3 ">
+      <div className="flex justify-end position-relative pt-3 ">
         <Typography
           className={
             " text-center  " + (mdUp ? " listingProductTitle " : "")
