@@ -12,3 +12,11 @@ export function decimalNumber(value, to){
   
   }
 export const  PaymentMethod = ["Cash", "Bank AL Habib 00965-45297841", "Soneri Bank 00789-5464644644"]
+
+export const PageHeadTitle = {
+  sale :"Sales",
+  product : "Products",
+  customer : "Customers",
+  productof : "ProductOf",
+  inventory : "Inventory"
+}

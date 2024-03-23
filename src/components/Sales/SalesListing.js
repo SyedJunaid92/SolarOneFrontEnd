@@ -29,7 +29,7 @@ import { useSnackbar } from 'notistack'
 import { getAllSalePaginate } from "../../services/sale.service";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ViewSales from "./ViewSale";
-import BGImage from '../../images/productlistbg.png'
+import Loading from "../Loading";
 
 
 const SalesListing = () => {
@@ -134,11 +134,7 @@ const SalesListing = () => {
   };
 
   return (
-    <div className=" min-h-screen" style={{
-      backgroundImage: `url(${BGImage})`, backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: 'center',
-    }}>
+    <div >
       {/* Add Sales  */}
       <Dialog
         open={addSaleModal}
@@ -175,7 +171,7 @@ const SalesListing = () => {
         </DialogContent>
       </Dialog>
 
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
         <Typography
           className={" text-center "}
           sx={{ fontSize: "2rem", color: Colors.customer.headColor }}
@@ -183,9 +179,9 @@ const SalesListing = () => {
         >
           Sales
         </Typography>
-      </div>
+      </div> */}
 
-      <Paper className="mx-2" style={{ minHeight: "50vh" }} elevation={15}>
+      <Paper className="mx-28" style={{ minHeight: "50vh" }} elevation={24}>
         <div className="flex justify-end mb-0 mr-2">
           <Button
             variant="contained"
@@ -209,7 +205,8 @@ const SalesListing = () => {
           </Button>
         </div>
 
-        <TableContainer sx={{ overflow: "auto" }}>
+       {loading ? <Loading />  :
+       <TableContainer sx={{ overflow: "auto" }}>
           <Table className={cx(classes.table, classes.hover)}>
             <TableHead>
               <TableRow>
@@ -292,9 +289,9 @@ const SalesListing = () => {
               })}
             </TableBody>
           </Table>
-        </TableContainer>
+        </TableContainer>}
 
-        {data?.length > 0 &&
+        {data?.length > 0 && !loading &&
           <div className=" flex justify-center p-2">
             <Pagination
               count={totalPages}

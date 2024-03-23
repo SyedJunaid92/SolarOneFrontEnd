@@ -30,6 +30,7 @@ import { useSnackbar } from 'notistack'
 import AddInventory from "./AddInventory";
 import { getAllInventoryPaginate, updateInventoryQuantity } from "../../services/inventory.service";
 import AddIcon from '@mui/icons-material/Add';
+import Loading from "../Loading";
 
 const InventoryListing = () => {
     const theme = useTheme();
@@ -158,11 +159,7 @@ const InventoryListing = () => {
 
     return (
 
-        <div className=" min-h-screen" style={{
-            backgroundImage: `url(${BGImage})`, backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: 'center',
-        }} >
+        <div >
 
         {/* Add Inventory  */}
       <Dialog
@@ -180,7 +177,7 @@ const InventoryListing = () => {
         </DialogContent>
       </Dialog>
 
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
                 <Typography
                     className={
                         " text-center "
@@ -191,7 +188,7 @@ const InventoryListing = () => {
                     Inventory
                 </Typography>
                 
-            </div>
+            </div> */}
 
             <Paper className=" mx-28" style={{ minHeight: "50vh" }} elevation={24}>
                     <div className="flex justify-end mb-0 mr-2">
@@ -217,7 +214,7 @@ const InventoryListing = () => {
                         </Button>
                     </div>
 
-                    <TableContainer sx={{ overflow: "auto" }}>
+                  {loading ? <Loading />  : <TableContainer sx={{ overflow: "auto" }}>
           <Table className={cx(classes.table, classes.hover)}>
             <TableHead>
               <TableRow>
@@ -339,9 +336,9 @@ const InventoryListing = () => {
 
           </Table>
 
-        </TableContainer>
+                    </TableContainer>}
 
-        {data?.length > 0 &&
+        {data?.length > 0 && !loading &&
           <div className=" flex justify-center p-2">
             <Pagination
               count={totalPages}

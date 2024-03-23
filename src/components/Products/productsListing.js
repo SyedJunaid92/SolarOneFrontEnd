@@ -11,6 +11,7 @@ import EditProduct from "./EditProduct";
 import BGImage from '../../images/productlistbg.png'
 import { useSnackbar } from 'notistack'
 import { deleteProduct, getAllProductPaginate } from "../../services/product.service";
+import Loading from "../Loading";
 
 const ProductsListing = () => {
   const theme = useTheme();
@@ -149,11 +150,7 @@ const ProductsListing = () => {
 
 
   return (
-    <div className=" min-h-screen" style={{
-      backgroundImage: `url(${BGImage})`, backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: 'center',
-    }} >
+    <div >
 
       {/* Add Product  */}
       <Dialog
@@ -222,15 +219,7 @@ const ProductsListing = () => {
 
 
       <div className="flex justify-end position-relative pt-3 ">
-        <Typography
-          className={
-            " text-center  " + (mdUp ? " listingProductTitle " : "")
-          }
-          sx={{ fontSize: "2rem", color: "#000D6B" }}
-          fontWeight={theme.typography.fontWeightBold}
-        >
-          Products
-        </Typography>
+        
         <Button variant="outlined" size="small"
           sx={{ color: "#29B3FD", borderColor: "#29B3FD", borderRadius: '10px' }}
           onClick={() => setAddProductModal(true)}
@@ -239,7 +228,9 @@ const ProductsListing = () => {
         </Button>
       </div>
 
-      <div className={"grid sm:grid-cols-1 md:grid-cols-2  gap-x-5 lg:px-28 px-8 " + classes.productCard}>
+     {loading ? <Loading /> 
+     :
+       <div className={"grid sm:grid-cols-1 md:grid-cols-2  gap-x-5 lg:px-28 px-8 " + classes.productCard}>
         {data?.map((item, index) => {
           return (
             <div className=" mb-4  shadow-lg  rounded-xl" key={index}>
@@ -338,9 +329,9 @@ const ProductsListing = () => {
             </div>
           );
         })}
-      </div>
+      </div>}
 
-      <div className="d-flex justify-content-center p-2">
+     {!loading &&  <div className="d-flex justify-content-center p-2">
         <Pagination
           count={totalPages}
           page={pageNumber}
@@ -348,7 +339,7 @@ const ProductsListing = () => {
           color="primary"
         onChange={handlePaginationChange}
         />
-      </div>
+      </div>}
 
     </div>
   );
