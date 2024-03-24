@@ -3,7 +3,7 @@ import { makeStyles } from "tss-react/mui";
 const useStyles = makeStyles()((theme, _params, classes) => ({
 
     productCard:{
-        marginTop:theme.spacing(7),
+        marginTop:theme.spacing(1),
         minWidth:'1200px',
         [theme.breakpoints.down("sm")]:{
             minWidth:'600px',

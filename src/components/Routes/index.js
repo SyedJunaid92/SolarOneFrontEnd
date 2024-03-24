@@ -1,5 +1,5 @@
 import React , {useEffect} from "react";
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import {  Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
 import { CustomerListing, InventoryListing, Login, ProductListing, ProductOfListing, SalesListing } from "./pageListAsync";
 import LandingPage from "../LandingPage";
