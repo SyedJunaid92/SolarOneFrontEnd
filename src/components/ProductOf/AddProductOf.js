@@ -4,7 +4,7 @@ import Colors from "../../utils/colors";
 import { useSnackbar } from 'notistack'
 
 import { productOfAdd } from "../../services/productOf.service";
-
+import { showAlert } from "../../utils/customsFunctions";
 
 const AddProductOf = (props) => {
     const {setRefreshData,refreshData,setAddProductOfModal} = props
@@ -57,13 +57,7 @@ const AddProductOf = (props) => {
         }
     }
     
-    const showAlert = (message,type)=>{
-            
-        return(
-          enqueueSnackbar(message,{variant:type,autoHideDuration:2000, anchorOrigin:{horizontal:"right", vertical:'top'}})
-        )
-      }
-    
+ 
 
     return (<div>
         <div className=" flex justify-center">

@@ -6,6 +6,7 @@ import { useTheme } from "@mui/material/styles";
 
 import { useSnackbar } from 'notistack'
 import { editProduct } from "../../services/product.service";
+import { showAlert } from "../../utils/customsFunctions";
 
 const EditProduct = (props) =>{
     const theme = useTheme();
@@ -71,16 +72,6 @@ const productUpdate = async()=>{
 
     }
 }
-
-const showAlert = (message,type)=>{
-        
-    return(
-      enqueueSnackbar(message,{variant:type,autoHideDuration:1000, anchorOrigin:{horizontal:"right", vertical:'top'}})
-    )
-  }
-
-    
-
 
     return(
         <div>

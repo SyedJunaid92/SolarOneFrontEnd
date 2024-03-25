@@ -13,6 +13,7 @@ import { saleAdd } from "../../services/sale.service";
 import { getAllInventory } from "../../services/inventory.service";
 import { getAllproductOf } from "../../services/productOf.service";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { showAlert } from "../../utils/customsFunctions";
 
 
 const AddSales = (props) => {
@@ -325,12 +326,7 @@ const AddSales = (props) => {
         }
     }
     
-    const showAlert = (message,type)=>{
-            
-        return(
-          enqueueSnackbar(message,{variant:type,autoHideDuration:2000, anchorOrigin:{horizontal:"right", vertical:'top'}})
-        )
-      }
+
 
     return (
         <div className="mt-5">

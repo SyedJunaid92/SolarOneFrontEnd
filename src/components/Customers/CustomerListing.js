@@ -32,6 +32,7 @@ import EditCustomer from "./EditCustomer";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BGImage from '../../images/productlistbg.png'
 import Loading from "../Loading";
+import { showAlert } from "../../utils/customsFunctions";
 
 
 const CustomerListing = () => {
@@ -86,12 +87,7 @@ const CustomerListing = () => {
     }
   }
 
-  const showAlert = (message, type) => {
-
-    return (
-      enqueueSnackbar(message, { variant: type, autoHideDuration: 1000, anchorOrigin: { horizontal: "right", vertical: 'top' } })
-    )
-  }
+ 
 
   const BootstrapDialogTitle = (props) => {
     const { children, ...other } = props;

@@ -1,3 +1,6 @@
+import { enqueueSnackbar } from 'notistack'
+
+
 export function numberWithCommas(amount){
   
     if(amount==='NaN' || isNaN(amount) || amount==='' || amount===undefined){
@@ -20,4 +23,11 @@ export const PageHeadTitle = {
   productof : "ProductOf",
   inventory : "Inventory",
   home : "Menu"
+}
+
+export const showAlert = (message, type) => {
+
+  return (
+    enqueueSnackbar(message, { variant: type })
+  )
 }

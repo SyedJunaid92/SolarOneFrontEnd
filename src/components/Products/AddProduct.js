@@ -5,6 +5,7 @@ import Colors from '../../utils/colors'
 import { useTheme } from "@mui/material/styles";
 import { useSnackbar } from 'notistack'
 import { addProduct } from "../../services/product.service";
+import { showAlert } from "../../utils/customsFunctions";
 
 
 const AddProduct = (props) => {
@@ -66,19 +67,8 @@ const productAdd = async()=>{
           } else if (err) {
             showAlert(err,"error");
           }
-
-    }
-}
-
-const showAlert = (message,type)=>{
-        
-    return(
-      enqueueSnackbar(message,{variant:type,autoHideDuration:1000, anchorOrigin:{horizontal:"right", vertical:'top'}})
-    )
-  }
-
-
-
+    
+        }    }
 
 
     return (

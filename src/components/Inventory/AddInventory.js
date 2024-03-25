@@ -7,6 +7,7 @@ import match from "autosuggest-highlight/match";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { addInventory } from "../../services/inventory.service";
+import { showAlert } from "../../utils/customsFunctions";
 
 const AddInventory = (props) => {
     const {setRefreshData,refreshData,setAddInventoryModal} = props
@@ -62,14 +63,7 @@ const AddInventory = (props) => {
     getProductOf();
   }, []);
 
-  const showAlert = (message, type) => {
-    return enqueueSnackbar(message, {
-      variant: type,
-      autoHideDuration: 2000,
-      anchorOrigin: { horizontal: "right", vertical: "top" },
-    });
-  };
-
+ 
   const inventoryAddData = async()=>{
     try{
         if(!selectedProduct?.product_code?.trim()) throw "Please Select product"

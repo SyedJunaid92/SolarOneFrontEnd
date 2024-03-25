@@ -33,6 +33,7 @@ import AddProductOf from "./AddProductOf";
 import ViewProductOf from "./ViewProductOf";
 import EditProductOf from "./EditProductOf";
 import Loading from "../Loading";
+import { showAlert } from "../../utils/customsFunctions";
 
 
 const ProductOfListing = () => {
@@ -87,12 +88,7 @@ const ProductOfListing = () => {
     }
   }
 
-  const showAlert = (message, type) => {
 
-    return (
-      enqueueSnackbar(message, { variant: type, autoHideDuration: 2000, anchorOrigin: { horizontal: "right", vertical: 'top' } })
-    )
-  }
 
   const BootstrapDialogTitle = (props) => {
     const { children, ...other } = props;

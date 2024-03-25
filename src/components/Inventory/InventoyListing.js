@@ -31,6 +31,7 @@ import AddInventory from "./AddInventory";
 import { getAllInventoryPaginate, updateInventoryQuantity } from "../../services/inventory.service";
 import AddIcon from '@mui/icons-material/Add';
 import Loading from "../Loading";
+import { showAlert } from "../../utils/customsFunctions";
 
 const InventoryListing = () => {
     const theme = useTheme();
@@ -46,12 +47,6 @@ const InventoryListing = () => {
     const [textFieldData,setTextFieldData] = useState([])
     const [updateQuantityLoading,setUpdateQuantityLoading] = useState([])
 
-      const showAlert = (message, type) => {
-
-        return (
-          enqueueSnackbar(message, { variant: type, autoHideDuration: 1000, anchorOrigin: { horizontal: "right", vertical: 'top' } })
-        )
-      }
     
       const BootstrapDialogTitle = (props) => {
         const { children, ...other } = props;

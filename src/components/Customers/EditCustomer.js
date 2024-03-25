@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import Colors from "../../utils/colors";
 import { useSnackbar } from "notistack";
 import { customerAdd, customerUpdate } from "../../services/customer.service";
+import { showAlert } from "../../utils/customsFunctions";
 
 const EditCustomer = (props) => {
   const { setRefreshData, refreshData, setEditCustomerModal, data } = props;
@@ -56,13 +57,7 @@ const EditCustomer = (props) => {
     }
   };
 
-  const showAlert = (message, type) => {
-    return enqueueSnackbar(message, {
-      variant: type,
-      autoHideDuration: 2000,
-      anchorOrigin: { horizontal: "right", vertical: "top" },
-    });
-  };
+
 
   return (
     <div>

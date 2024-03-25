@@ -14,6 +14,7 @@ import { deleteProduct, getAllProductPaginate } from "../../services/product.ser
 import Loading from "../Loading";
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import AddIcon from '@mui/icons-material/Add';
+import { showAlert } from "../../utils/customsFunctions";
 
 const ProductsListing = () => {
   const theme = useTheme();
@@ -139,13 +140,7 @@ const ProductsListing = () => {
     }
   }
 
-  const showAlert = (message,type)=>{
-        
-    return(
-      enqueueSnackbar(message,{variant:type,autoHideDuration:1000, anchorOrigin:{horizontal:"right", vertical:'top'}})
-    )
-  }
-
+  
   const handlePaginationChange = async (event, page) => {
     await getProductData(page);
   };

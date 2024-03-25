@@ -30,6 +30,7 @@ import { getAllSalePaginate } from "../../services/sale.service";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ViewSales from "./ViewSale";
 import Loading from "../Loading";
+import { showAlert } from "../../utils/customsFunctions";
 
 
 const SalesListing = () => {
@@ -123,12 +124,7 @@ const SalesListing = () => {
     }
   }
 
-  const showAlert = (message, type) => {
-
-    return (
-      enqueueSnackbar(message, { variant: type, autoHideDuration: 1000, anchorOrigin: { horizontal: "right", vertical: 'top' } })
-    )
-  }
+ 
   const handlePaginationChange = async (event, page) => {
     await getSaleData(page);
   };

@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import Colors from "../../utils/colors";
 import { useSnackbar } from 'notistack'
 import { customerAdd } from "../../services/customer.service";
-
+import { showAlert } from "../../utils/customsFunctions";
 
 const AddCustomer = (props) => {
     const {setRefreshData,refreshData,setAddCustomerModal} = props
@@ -56,13 +56,7 @@ const AddCustomer = (props) => {
         }
     }
     
-    const showAlert = (message,type)=>{
-            
-        return(
-          enqueueSnackbar(message,{variant:type,autoHideDuration:2000, anchorOrigin:{horizontal:"right", vertical:'top'}})
-        )
-      }
-    
+
 
     return (<div>
         <div className=" flex justify-center">

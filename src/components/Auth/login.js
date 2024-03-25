@@ -7,7 +7,7 @@ import '../../styles/login.css'
 import { signInUser } from "../../services/auth.service";
 import { useSnackbar } from 'notistack'
 import {useNavigate} from 'react-router-dom'
-
+import { showAlert } from "../../utils/customsFunctions";
 const Login = ()=>{
     const theme = useTheme()
     const navigate= useNavigate()
@@ -28,13 +28,6 @@ const Login = ()=>{
       const handleMouseDownPassword = (event) => {
         event.preventDefault();
       };
-
-      const showAlert = (message,type)=>{
-        
-        return(
-          enqueueSnackbar(message,{variant:type,autoHideDuration:1000, anchorOrigin:{horizontal:"right", vertical:'top'}})
-        )
-      }
 
 
 
