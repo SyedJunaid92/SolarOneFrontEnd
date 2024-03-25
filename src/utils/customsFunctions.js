@@ -18,5 +18,6 @@ export const PageHeadTitle = {
   product : "Products",
   customer : "Customers",
   productof : "ProductOf",
-  inventory : "Inventory"
+  inventory : "Inventory",
+  home : "Menu"
 }

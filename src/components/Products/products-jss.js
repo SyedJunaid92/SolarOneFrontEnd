@@ -17,6 +17,16 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: 'center',
+    },
+    mainDiv:{
+        
+        minWidth:'1200px',
+        [theme.breakpoints.down("sm")]:{
+            minWidth:'600px',
+           
+
+        }
+
     }
 
 

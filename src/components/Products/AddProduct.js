@@ -125,14 +125,14 @@ const showAlert = (message,type)=>{
                     <div className="mb-3">
                         <TextField label="Price"
                             value={productPrice}
-                            onChange={(e) => setProductPrice(e.target.value)}
+                            onChange={(e) => setProductPrice(e.target.value?.replace(/[^0-9]/gi, ""))}
                             fullWidth size="small" sx={{ color: Colors.products.textFieldCOlor, borderColor: Colors.products.borderColor }} />
 
                     </div>
                     <div className="mb-3">
                         <TextField label="Cost"
                             value={productCost}
-                            onChange={(e) => setProductCost(e.target.value)}
+                            onChange={(e) => setProductCost(e.target.value?.replace(/[^0-9]/gi, ""))}
                             fullWidth size="small" sx={{ color: Colors.products.textFieldCOlor, borderColor: Colors.products.borderColor }} />
 
                     </div>
@@ -146,7 +146,7 @@ const showAlert = (message,type)=>{
                     <div className="mb-3">
                         <TextField label="Watt"
                             value={productWatt}
-                            onChange={(e) => setProductWatt(e.target.value)}
+                            onChange={(e) => setProductWatt(e.target.value?.replace(/[^0-9]/gi, ""))}
                             fullWidth size="small" sx={{ color: Colors.products.textFieldCOlor, borderColor: Colors.products.borderColor }} />
 
                     </div>

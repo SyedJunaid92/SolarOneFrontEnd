@@ -1,7 +1,7 @@
 import React , {useEffect} from "react";
 import {  Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
-import { CustomerListing, InventoryListing, Login, ProductListing, ProductOfListing, SalesListing } from "./pageListAsync";
+import { CustomerListing, HomePage, InventoryListing, Login, ProductListing, ProductOfListing, SalesListing } from "./pageListAsync";
 import LandingPage from "../LandingPage";
 
 
@@ -30,12 +30,13 @@ const ApplicationRoutes = () => {
 
 
                 <Route path="/app" element={<LandingPage />}>
+                <Route path="/app/home" element={<HomePage />} />
                     <Route path="/app/product" element={<ProductListing />} />
                     <Route path="/app/sale" element={<SalesListing />} />
                     <Route path="/app/customer" element={<CustomerListing />} />
                     <Route path="/app/productof" element={<ProductOfListing />} />
                     <Route path="/app/inventory" element={<InventoryListing />} />
-                    <Route path="*" element={<Navigate to="/app/product" replace />} />
+                    <Route path="*" element={<Navigate to="/app/home" replace />} />
                 </Route>
 
 

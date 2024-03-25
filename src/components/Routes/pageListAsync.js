@@ -53,3 +53,12 @@ export const ProductListing = loadable(
       fallback: <Loading />,
     }
   );
+
+
+  // Home Page
+  export const HomePage = loadable(
+    () => import("../HomePage"),
+    {
+      fallback: <Loading />,
+    }
+  );

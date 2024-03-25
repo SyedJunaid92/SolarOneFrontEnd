@@ -181,7 +181,7 @@ const SalesListing = () => {
         </Typography>
       </div> */}
 
-      <Paper className="sm:mx-5 md:mx-28" style={{ minHeight: "50vh" }} elevation={24}>
+      <Paper className="mx-2 md:mx-28" style={{ minHeight: "50vh" }} elevation={24}>
         <div className="flex justify-end mb-0 mr-2">
           <Button
             variant="contained"

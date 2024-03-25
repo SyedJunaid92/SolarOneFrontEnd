@@ -53,7 +53,7 @@ const Login = ()=>{
             setLoading(false);
          
             showAlert(response.data.message,"success")
-            navigate("/app/product",{replace:true})
+            navigate("/app/home",{replace:true})
 
           }else{
             setLoading(false);

@@ -1,4 +1,4 @@
-import { Autocomplete, Avatar, MenuItem, TextField, Typography, Button } from "@mui/material";
+import { Autocomplete, Avatar, MenuItem, TextField, Typography, Button, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Colors from "../../utils/colors";
 import '../../styles/sales.css'
@@ -12,6 +12,7 @@ import { useSnackbar } from 'notistack'
 import { saleAdd } from "../../services/sale.service";
 import { getAllInventory } from "../../services/inventory.service";
 import { getAllproductOf } from "../../services/productOf.service";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 const AddSales = (props) => {
@@ -31,6 +32,7 @@ const AddSales = (props) => {
     const [loading,setLoading] = useState(false)
     const [allProductOf,setAllProductOf] = useState([])
     const [allInventory,setAllInventory] = useState([])
+    const [loadProductData,setLoadProductData] = useState(true)
 
     useEffect(() => {
         const getCustomerData = async () => {
@@ -51,11 +53,14 @@ const AddSales = (props) => {
                 const response = await getAllProduct(email)
                 if (response.status == 200) {
                     setAllProduct(response.data.data)
+                    setLoadProductData(false)
                 } else {
+                    setLoadProductData(false)
                     setAllProduct([])
                 }
 
             } catch (err) {
+                setLoadProductData(false)
                 setAllProduct([])
 
             }
@@ -157,7 +162,7 @@ const AddSales = (props) => {
                     <Avatar src={data.picture} sx={{ width: '25px', height: '25px', border: `2px solid ${Colors.sales.borderColor}`, }} variant="circular" />
                     <span>{data?.code}</span>
 
-                    <a className="delete" href="#" onClick={(e) => handleRemoveRow(e, data)} title="Remove row">X</a>
+                    {/* <a className="delete" href="#" onClick={(e) => handleRemoveRow(e, data)} title="Remove row">X</a> */}
                 </div>
             </td>
             <td className="description">
@@ -191,17 +196,12 @@ const AddSales = (props) => {
                 select
                 value={`${data.product_of}-${data.product_of_id}` || ""}
                 onChange={(e)=>{
-                    // if(+data.qty > 0)
-                    // {
+                  
                         handleInventoryItem("product_of", data, e)
-
-                    // }else{
-                    //     handleChangeTable("product_of", data.code, e)
-                    // }
 
                 }}
                 >
-                {allProductOf.map(item=>{
+                {allProductOf?.map(item=>{
                     return <MenuItem key={item._id} value={`${item.name}-${item._id}`}>{item.name}</MenuItem>
                 })}
 
@@ -211,6 +211,11 @@ const AddSales = (props) => {
 
                 {numberWithCommas(decimalNumber(data.qty * data.price, 2) - data.discount)}
 
+            </td>
+            <td>
+                <IconButton onClick={(e)=>handleRemoveRow(e, data)}>
+                    <DeleteForeverIcon color="error" />
+                </IconButton>
             </td>
 
         </tr>
@@ -335,6 +340,7 @@ const AddSales = (props) => {
                         <Autocomplete
                             disableClearable={!selectProduct}
                             size="small"
+                            loading={loadProductData}
                             sx={{
                                 width: "100%",
                             }}
@@ -420,6 +426,7 @@ const AddSales = (props) => {
                                         <th className="textAlign">Discount</th>
                                         <th className="textAlign">Product Of</th>
                                         <th className="textAlign">Total</th>
+                                        <th className="textAlign">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Hidden, IconButton, ListItemText, Pagination, Typography, useMediaQuery } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Hidden, IconButton, ListItemText, Pagination, TextField, Typography, useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import "../../styles/product.css";
@@ -12,6 +12,8 @@ import BGImage from '../../images/productlistbg.png'
 import { useSnackbar } from 'notistack'
 import { deleteProduct, getAllProductPaginate } from "../../services/product.service";
 import Loading from "../Loading";
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import AddIcon from '@mui/icons-material/Add';
 
 const ProductsListing = () => {
   const theme = useTheme();
@@ -150,7 +152,7 @@ const ProductsListing = () => {
 
 
   return (
-    <div >
+    <div  >
 
       {/* Add Product  */}
       <Dialog
@@ -218,14 +220,33 @@ const ProductsListing = () => {
 
 
 
-      <div className="flex justify-end position-relative pt-3 ">
-        
+      
+
+      <div className="grid grid-cols-8 lg:px-28 ps-2 pe-8 gap-x-2 mb-5">
+      <div className=" col-span-6">
+        <TextField 
+          placeholder="Search"
+          fullWidth
+          size="small"
+          sx={{ color: Colors.products.textFieldCOlor, borderColor: Colors.products.borderColor, backgroundColor:"#D6F0FE" }}
+        />
+      </div>
+      <div className="col-span-2  flex gap-x-2" >
+      <Button variant="outlined" size="small"
+          sx={{ color: "#29B3FD", borderColor: "#29B3FD", borderRadius: '10px', backgroundColor:"#D6F0FE", minWidth:'75px' }}
+         
+        >
+          Filter <FilterAltOutlinedIcon sx={{fontSize:'20px'}} />
+        </Button>
         <Button variant="outlined" size="small"
-          sx={{ color: "#29B3FD", borderColor: "#29B3FD", borderRadius: '10px' }}
+          sx={{ color: "#29B3FD", borderColor: "#29B3FD", borderRadius: '10px', backgroundColor:"#D6F0FE", minWidth:'75px' }}
           onClick={() => setAddProductModal(true)}
         >
-          Add +
+          Add <AddIcon  sx={{fontSize:'20px'}} />
         </Button>
+      </div>
+      
+
       </div>
 
      {loading ? <Loading /> 
@@ -261,14 +282,16 @@ const ProductsListing = () => {
                   </Typography>
                 </div>
                 <div className="ps-2 w-full">
-                  <div className="flex justify-between">
+                  <div className="grid  grid-cols-4">
+                  <div className=" col-span-3">
                     <Typography
                       fontWeight={theme.typography.fontWeightBold}
                       sx={{ color: "#515151", fontSize: "2rem", lineHeight: 1 }}
                     >
                       {item.name}
                     </Typography>
-                    <div onClick={()=>setSelectedProduct(item)}>
+                    </div>
+                    <div  onClick={()=>setSelectedProduct(item)}>
 
                       <i className="ion-ios-create-outline productListingButton px-2 me-1  text-lg cursor-pointer" onClick={() => setEditProductModal(true)} />
                       <i className="ion-ios-trash-outline productListingButton px-2 ms-1  text-lg cursor-pointer" onClick={() => setDeleteProductModal(true)} />
