@@ -222,7 +222,7 @@ const ProductsListing = () => {
 
       
 
-      <div className="grid grid-cols-8 lg:px-28 ps-2 pe-8 gap-x-2 mb-5">
+      <div className="grid grid-cols-8  lg:px-28  pl-2 pr-8 gap-x-2 mb-5">
       <div className=" col-span-6">
         <TextField 
           placeholder="Search"
